@@ -14,23 +14,23 @@ jobs:
       fail-fast: false
       matrix:
         group:
-          - Core
-          - OptimizationBBO
-          - OptimizationCMAEvolutionStrategy
-          - OptimizationEvolutionary
-          - OptimizationFlux
-          - OptimizationGCMAES
-          - OptimizationMetaheuristics
+          # - Core
+          # - OptimizationBBO
+          # - OptimizationCMAEvolutionStrategy
+          # - OptimizationEvolutionary
+          # - OptimizationFlux
+          # - OptimizationGCMAES
+          # - OptimizationMetaheuristics
           - OptimizationMOI
-          - OptimizationMultistartOptimization
-          - OptimizationNLopt
-          #- OptimizationNonconvex
-          - OptimizationNOMAD
-          - OptimizationOptimJL
-          - OptimizationOptimisers
-          - OptimizationQuadDIRECT
-          - OptimizationSpeedMapping
-          - OptimizationPolyalgorithms
+          # - OptimizationMultistartOptimization
+          # - OptimizationNLopt
+          # #- OptimizationNonconvex
+          # - OptimizationNOMAD
+          # - OptimizationOptimJL
+          # - OptimizationOptimisers
+          # - OptimizationQuadDIRECT
+          # - OptimizationSpeedMapping
+          # - OptimizationPolyalgorithms
         version:
           - '1'
           - '1.6'
@@ -49,6 +49,8 @@ jobs:
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
             ${{ runner.os }}-
+      - if: ${{ matrix.group == 'OptimizationMOI' }}
+        run: ../.github/script/baron.sh
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         env:
